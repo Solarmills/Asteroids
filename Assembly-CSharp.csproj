@@ -64,8 +64,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Asteroid.cs" />
     <Compile Include="Assets\Scripts\Gameplay_manager.cs" />
     <Compile Include="Assets\Scripts\Main_Menu_Script.cs" />
+    <Compile Include="Assets\Scripts\Projectile.cs" />
     <Compile Include="Assets\Scripts\Ship_controller.cs" />
     <None Include="Assets\Sprites\space_background_pack\license.txt" />
     <None Include="Assets\Sprites\Spaceship-shooter-environment\readme.txt" />
