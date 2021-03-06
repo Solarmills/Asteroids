@@ -13,15 +13,16 @@ public class Ship_controller : MonoBehaviour
     private SpriteRenderer m_Renderer;
     private AudioSource m_Source;
     private bool CanCheck= false;
-    // Start is called before the first frame update
+
     void Start()
     {
         m_Source = GetComponent<AudioSource>();
         m_Renderer = GetComponentInChildren<SpriteRenderer>();
+        //This needed to prevent lose screen on first frames
         StartCoroutine(DelayToCheck());
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         if (Input_Locked) return;
@@ -29,12 +30,14 @@ public class Ship_controller : MonoBehaviour
         {
             Shoot();
         }
+        //Lose if go out of screen
         if (!m_Renderer.isVisible && CanCheck) 
         {
             Lose();
         }
     }
 
+    //Movement by fixed timer
     private void FixedUpdate()
     {
         if (Input_Locked) return;
@@ -49,11 +52,13 @@ public class Ship_controller : MonoBehaviour
      
     }
 
-    private void Shoot() {
+    //Simple shoot processing
+    private void Shoot() { 
         m_Source.PlayOneShot(ShootSound);
         Instantiate(Projectile, Fire_point.transform.position, transform.rotation, null);
     }
 
+    //OPerating lose by collisions with other objects
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<Asteroid>()) 
@@ -66,6 +71,7 @@ public class Ship_controller : MonoBehaviour
         }
     }
 
+    //Simple stoper for player processes
     private void Lose() 
     {
         Input_Locked = true;
@@ -73,7 +79,8 @@ public class Ship_controller : MonoBehaviour
         CanCheck = false;
     }
 
-    public void Reset()
+    //Setting player to start position
+    public void ResetGame()
     {
         StartCoroutine(DelayToCheck());
         Input_Locked = false;
@@ -81,6 +88,7 @@ public class Ship_controller : MonoBehaviour
         transform.rotation = new Quaternion();
     }
 
+    //This needed to prevent lose screen on first frames
     private IEnumerator DelayToCheck() {
         yield return new WaitForSeconds(1f);
         CanCheck = true;

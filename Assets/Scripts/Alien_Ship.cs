@@ -6,13 +6,8 @@ public class Alien_Ship : MonoBehaviour
 {
     public Gameplay_manager manager;
     public Ship_controller player;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    //Rotate and move alien to player
     void Update()
     {
         Vector3 direction = player.transform.position - transform.position;

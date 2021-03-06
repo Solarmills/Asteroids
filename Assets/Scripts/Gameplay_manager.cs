@@ -24,13 +24,9 @@ public class Gameplay_manager : MonoBehaviour
         StartCoroutine(Spawn());
     }
 
-    // Update is called once per frame
-    void Update()
+    //Simple spawn for asteroids and aliens
+    private IEnumerator Spawn() 
     {
-        
-    }
-
-    private IEnumerator Spawn() {
         while (Playable)
         {
             yield return new WaitForSeconds(Random.Range(.3f, 2f));
@@ -58,7 +54,8 @@ public class Gameplay_manager : MonoBehaviour
         
     }
 
-    public void Lose() {
+    public void Lose() 
+    {
         StopAllCoroutines();
         Playable = false;
         ButtonGroup.SetActive(true);
@@ -72,7 +69,7 @@ public class Gameplay_manager : MonoBehaviour
         }
         Playable = true;
         ButtonGroup.SetActive(false);
-        Ship.GetComponent<Ship_controller>().Reset();
+        Ship.GetComponent<Ship_controller>().ResetGame();
         StartCoroutine(Spawn());
     }
 
@@ -87,7 +84,8 @@ public class Gameplay_manager : MonoBehaviour
         Score.text = i_Score.ToString();
     }
 
-    private void ClearScore() {
+    private void ClearScore() 
+    {
         i_Score = 0;
         Score.text = "0";
     }

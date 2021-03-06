@@ -6,27 +6,33 @@ public class Asteroid : MonoBehaviour
 {
     private int size;
     private Vector3 Translation_Direction;
+    //Make sprite holder for cut relations betwen movement and visual
     [SerializeField] private GameObject Sprite_Container;
     public Gameplay_manager manager;
 
-    // Start is called before the first frame update
     void Start()
     {
+        //Randomize asteroid size
         size = Random.Range(0, 3);
         ReSize();
+        //Set lifetime
         Destroy(gameObject, 10f);
+        //Randopm ratation for better look
         Sprite_Container.transform.Rotate(0,0,Random.Range(0, 360));
     }
 
-    // Update is called once per frame
-    void Update()
+    //Move by fixed timer
+    void FixedUpdate()
     {
         transform.Translate(Translation_Direction);
     }
 
+    //Operates when asteroid getting hit
     public void Break()
     {
+        //Increace score
         manager.AddScore(100);
+        //Destroy if already small, in other cases reduce size
         if (size == 0)
         {
             Destroy(gameObject);
@@ -41,7 +47,9 @@ public class Asteroid : MonoBehaviour
         }
     }
 
-    private void ReSize() {
+    //Set scale based on size
+    private void ReSize() 
+    {
         switch (size)
         {
             case 0: transform.localScale = new Vector3(.3f, .3f, .3f); break;
@@ -51,7 +59,9 @@ public class Asteroid : MonoBehaviour
         }
     }
 
-    public void Set_Move_Direction(Vector3 Direction) {
+    //Just common setter
+    public void Set_Move_Direction(Vector3 Direction) 
+    {
         Translation_Direction = Direction;
     }
 }

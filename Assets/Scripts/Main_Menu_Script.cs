@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 public class Main_Menu_Script : MonoBehaviour
 {
 
-    public void open_game_scene() {
+    public void open_game_scene() 
+    {
         SceneManager.LoadSceneAsync(1);    
     }
 
-    public void close_app() {
+    public void close_app() 
+    {
         Application.Quit();
     }
 }
