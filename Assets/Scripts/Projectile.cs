@@ -23,17 +23,18 @@ public class Projectile : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.Translate(Vector3.up*.1f);
+        transform.Translate(Vector3.up*.2f);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("Collided");
+    {   
         if (collision.gameObject.GetComponent<Asteroid>())
         {
-            Debug.Log("w/ asteroid");
             collision.gameObject.GetComponent<Asteroid>().Break();
             Destroy(gameObject);
+        }
+        if (collision.gameObject.GetComponent<Alien_Ship>()) {
+            collision.gameObject.GetComponent<Alien_Ship>().Hitted();
         }
     }
 }

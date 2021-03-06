@@ -7,11 +7,12 @@ public class Asteroid : MonoBehaviour
     private int size;
     private Vector3 Translation_Direction;
     [SerializeField] private GameObject Sprite_Container;
+    public Gameplay_manager manager;
 
     // Start is called before the first frame update
     void Start()
     {
-        size = Random.Range(0, 2);
+        size = Random.Range(0, 3);
         ReSize();
         Destroy(gameObject, 10f);
         Sprite_Container.transform.Rotate(0,0,Random.Range(0, 360));
@@ -25,6 +26,7 @@ public class Asteroid : MonoBehaviour
 
     public void Break()
     {
+        manager.AddScore(100);
         if (size == 0)
         {
             Destroy(gameObject);
